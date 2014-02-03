@@ -1,4 +1,4 @@
-<config jar="salem.jar" mem="768m" server="plymouth.seatribe.se" res="http://plymouth.seatribe.se/res/">
+<config jar="salem.jar" mem="768m" server="game.salemthegame.com" res="http://game.salemthegame.com/res/">
 	<!-- WINDOWS -->
 	<item file="jogl_lib.jar" link="http://www.havenandhearth.com/java/jogl/jogl-natives-windows-i586.jar" os="Windows" arch="x86" extract="."/>
 	<item file="gluegen_lib.jar" link="http://www.havenandhearth.com/java/jogl/gluegen-rt-natives-windows-i586.jar" os="Windows" arch="x86" extract="."/>
@@ -50,8 +50,8 @@
 	
 	<item file="jogl.jar" link="http://www.havenandhearth.com/java/jogl/jogl.jar"/>
 	<item file="gluegen-rt.jar" link="http://www.havenandhearth.com/java/jogl/gluegen-rt.jar"/>
-	<item file="salem-res.jar" link="http://plymouth.seatribe.se/java/salem-res.jar" />
-	<item file="builtin-res.jar" link="http://plymouth.seatribe.se/java/builtin-res.jar" />
-	<item file="salem.jar" link="http://odditown.taggedup.com/ender/salem/salem.jar" />
-	<item file="client-res.jar" link="http://odditown.taggedup.com/ender/salem/client-res.jar" />
+	<item file="salem-res.jar" link="http://game.salemthegame.com/java/salem-res.jar" />
+	<item file="builtin-res.jar" link="http://game.salemthegame.com/java/builtin-res.jar" />
+	<item file="salem.jar" link="http://enderwiggin.github.io/Salem/salem.jar" />
+	<item file="client-res.jar" link="http://enderwiggin.github.io/Salem/client-res.jar" />
 </config>
