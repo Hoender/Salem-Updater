@@ -1,6 +1,8 @@
 package org.ender.updater;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +33,16 @@ public class UpdaterConfig {
 	if(!dir.exists()){
 	    dir.mkdirs();
 	}
-	
-	InputStream stream = UpdaterConfig.class.getResourceAsStream("/config.xml");
+	File cfg = new File("config.xml");
+	InputStream stream = null;
+	if(cfg.exists() && cfg.isFile()) {
+	    try {
+		stream = new FileInputStream(cfg);
+	    } catch (FileNotFoundException ignore) {}
+	} 
+	if(stream == null) {
+	    stream = UpdaterConfig.class.getResourceAsStream("/config.xml");
+	}
 
 	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	DocumentBuilder builder;
