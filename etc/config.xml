@@ -52,6 +52,7 @@
 	<item link="http://game.salemthegame.com/java/jogl2/jar/gluegen-rt.jar"/>
 	<item link="http://game.salemthegame.com/java/salem-res.jar" />
 	<item link="http://game.salemthegame.com/java/builtin-res.jar" />
-	<item link="http://dl.dropbox.com/u/23259217/salem/lsalem.jar" />
-	<item link="http://dl.dropbox.com/u/23259217/salem/client-res.jar" />
+        
+	<item link="http://DonnEssime.github.io/Salem/lsalem.jar" />
+	<item link="http://DonnEssime.github.io/Salem/client-res.jar" />
 </config>

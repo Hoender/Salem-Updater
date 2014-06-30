@@ -70,6 +70,28 @@ public class Updater {
     }
 
     private boolean has_update(Item item) {
+        try {
+            URL url = new URL(item.link);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("HEAD");
+            conn.setIfModifiedSince(item.date);
+            try {
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    item.size = Long.parseLong(conn.getHeaderField("Content-Length"));
+                    return true;
+                }
+            } catch (NumberFormatException e) {
+            }
+            conn.disconnect();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private boolean has_update_etag(Item item) {
 	try {
 	    URL  url = new URL(item.link);
 	    HttpURLConnection conn = (HttpURLConnection) url.openConnection();

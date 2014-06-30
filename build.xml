@@ -38,4 +38,14 @@
     	  <flattenmapper />
     	</signjar>
     </target>
+    
+    <target name="debug" depends="create_run_jar">
+		<java jar="jar/updater.jar"
+				dir="jar"
+				fork="true"
+				maxmemory="256m"
+				classpath="java">
+                        <jvmarg line="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -XX:-UseGCOverheadLimit" />
+		</java>
+	</target>
 </project>
