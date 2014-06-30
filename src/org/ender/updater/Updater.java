@@ -1,8 +1,11 @@
 package org.ender.updater;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -74,8 +77,44 @@ public class Updater {
 	    conn.setIfModifiedSince(item.date);
 	    try {
 		if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+                    boolean etagdiff=true;
+                    
+                    if(conn.getHeaderField("etag")!=null)
+                    {
+                        File etagfile = new File(item.file.getPath()+".etag");
+                        if(etagfile.exists() && etagfile.isFile())
+                        {
+                            try{
+                                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(etagfile));
+                                String etag = String.valueOf(ois.readObject());
+                                ois.close();
+                                if(etag.equals(conn.getHeaderField("etag")))
+                                {
+                                    etagdiff = false;
+                                }
+                                else
+                                {
+                                    ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(etagfile));
+                                    oos.writeObject(conn.getHeaderField("etag"));
+                                    oos.close();
+                                }
+                            }
+                            catch(ClassNotFoundException cnfe){}
+                            catch(IOException ioe){}
+                        }
+                        else
+                        {
+                            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(etagfile));
+                            oos.writeObject(conn.getHeaderField("etag"));
+                            oos.close();
+                        }
+                    }
+                    
+                    if(etagdiff)
+                    {
 		    item.size = Long.parseLong(conn.getHeaderField("Content-Length"));
 		    return true;
+                    }
 		}
 	    } catch(NumberFormatException e){}
 	    conn.disconnect();
